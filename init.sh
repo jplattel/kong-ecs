@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -eu
-docker
+docker > /dev/null
 [ -e /var/run/docker.sock ]
 
 HOST_IP=$(curl -s 169.254.169.254/1.0/meta-data/local-ipv4)
