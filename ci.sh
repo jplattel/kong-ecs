@@ -19,4 +19,4 @@ if [ $tag ]; then
   docker push partup/kong-ecs:$tag
 fi
 
-docker push partup/kong-ecs
+docker push partup/kong-ecs:$imgtag
