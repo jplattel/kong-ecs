@@ -2,8 +2,6 @@ import string
 
 from configurator.kong import Kong
 
-kong = Kong()
-
 
 def create_meteor_api(name: string, request_path: string):
     print("Creating {} API...".format(name))
@@ -34,6 +32,7 @@ def add_meteor_acl(name: string):
     })
 
 
+kong = Kong()
 apis = kong.get("/apis")
 
 api_names = set(map(lambda a: a["name"], apis.json()["data"]))
