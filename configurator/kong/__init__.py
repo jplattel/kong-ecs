@@ -83,7 +83,8 @@ class Kong:
         for acl in filter(lambda a: a["group"] not in cons_groups, groups):
             print("Removing wrong ACL '{}' for consumer '{}'".format(acl, consumer))
             self.delete("/consumers/{}/acls/{}".format(consumer, acl["id"]))
-        for group_to_create in filter(lambda g: g not in map(lambda x: x["group"], groups), cons_groups):
+        cur_group_names = map(lambda x: x["group"], groups)
+        for group_to_create in filter(lambda g: g not in cur_group_names, cons_groups):
             print("Creating ACL for {} on group {}".format(consumer, group_to_create))
             self.post("/consumers/{}/acls".format(consumer), json={
                 "group": group_to_create
