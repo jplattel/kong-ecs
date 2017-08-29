@@ -53,7 +53,7 @@ if "oauth_info" not in api_names:
         "name": "oauth_info",
         "preserve_host": True,
         "request_path": "/kong/oauth2",
-        "strip_request_path": False,
+        "strip_request_path": True,
         "upstream_url": "http://localhost:8001/oauth2"
     })
     add_meteor_acl("oauth_info")
