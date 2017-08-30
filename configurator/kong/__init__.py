@@ -65,15 +65,17 @@ class Kong:
             raise Exception("Error occured, http error code: {}".format(res.status_code))
         return res
 
-    def ensure_keyauth_acl(self, consumer: string, *cons_groups: string):
+    def ensure_consumer(self, consumer: string):
         self.defined_users.append(consumer)
-        print("Consumer: {}".format(consumer))
-        cons = self.get("/consumers/{}".format(consumer))
-        if cons.status_code == 404:
-            print("Creating consumer {}".format(consumer))
+        if self.get("/consumers/{}".format(consumer)).status_code == 404:
+            print("..Creating consumer {}".format(consumer))
             self.post("/consumers", json={
                 "username": consumer
             })
+
+    def ensure_keyauth_acl(self, consumer: string, *cons_groups: string):
+        print("Consumer: {}".format(consumer))
+        self.ensure_consumer(consumer)
         keys = self.get("/consumers/{}/key-auth".format(consumer)).json()["data"]
         if len(keys) == 0:
             print("Creating apikey for consumer {}...".format(consumer))
@@ -91,13 +93,8 @@ class Kong:
             })
 
     def ensure_oauth2_consumer(self, consumer: string, app_name: string, *redirect_uri: string):
-        self.defined_users.append(consumer)
         print("Consumer: {}".format(consumer))
-        if self.get("/consumers/{}".format(consumer)).status_code == 404:
-            print("..Creating consumer {}".format(consumer))
-            self.post("/consumers", json={
-                "username": consumer
-            })
+        self.ensure_consumer(consumer)
         apps = self.get("/consumers/{}/oauth2".format(consumer)).json()
         if apps["total"] == 0:
             print("..Creating application {}".format(app_name))

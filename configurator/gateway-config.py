@@ -1,6 +1,6 @@
 import string
 
-from configurator.kong import Kong
+from kong import Kong
 
 
 def create_meteor_api(name: string, request_path: string):
