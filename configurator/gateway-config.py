@@ -94,5 +94,6 @@ for api in api_names.difference(all_api_names):
 kong.ensure_keyauth_acl("meteor", "meteor")
 kong.ensure_keyauth_acl("admin", "admin")
 kong.ensure_oauth2_consumer("partupy", "Apper McAppface", "https://example.com/oauth2")
+kong.ensure_oauth2_consumer("jplattel", "Joost Plattel", "https://localhost:8000")
 
 kong.remove_undefined_users()
