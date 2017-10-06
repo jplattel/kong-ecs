@@ -95,5 +95,6 @@ kong.ensure_keyauth_acl("meteor", "meteor")
 kong.ensure_keyauth_acl("admin", "admin")
 kong.ensure_oauth2_consumer("partupy", "Apper McAppface", "https://example.com/oauth2")
 kong.ensure_oauth2_consumer("jplattel", "Joost Plattel", "http://localhost:8000/callback")
+kong.ensure_oauth2_consumer("zapier", "Zapier", "https://zapier.com/dashboard/auth/oauth/return/App1327CLIAPI/")
 
 kong.remove_undefined_users()
